@@ -40,13 +40,29 @@ for i in range(len(nomes_lojas)):
     })
 df_lojas = pd.DataFrame(lojas)
 
+faixa_precos = {
+    "Camiseta": (20, 120),
+    "Mangá": (20, 150),
+    "Action Figure": (150, 800),
+    "Mochila": (100, 250),
+    "Broche": (5, 20),
+    "Boné": (30, 100),
+    "HQ": (15, 150),
+    "Poster": (15, 40),
+    "Caneca": (30, 70),
+    "Chaveiro": (10, 25),
+    "Adesivo": (2, 10),
+    "Capacete Replica": (500, 1500)
+}
+
 pedidos = []
 for i in range(1, num_pedidos + 1):
     data_pedido = fake.date_between(start_date='-1y', end_date='today')
     loja = random.choice(lojas)
     produto = random.choice(produtos)
     qtde = random.randint(1, 5)
-    preco_unit = round(random.uniform(10.0, 500.0), 2)
+    faixa = faixa_precos[produto]
+    preco_unit = round(random.uniform(*faixa), 2)
     pagamento = random.choice(formas_pagamento)
 
     pedidos.append({
